@@ -6,6 +6,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { getWidthPercentage, getHeightPercentage } from "../helpers/common";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { theme } from "../constants/theme";
+
 const WelcomeScreen = () => {
   const router = useRouter();
   const goToHome = React.useCallback(() => {

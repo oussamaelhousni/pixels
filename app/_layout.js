@@ -4,7 +4,7 @@ import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 const _layout = () => {
   return (
-    <Stack>
+    <Stack initialRouteName="home/index">
       <Stack.Screen
         name="index"
         options={{ headerShown: false, statusBarColor: "black" }}
