@@ -26,8 +26,10 @@ export default function Categories({ activeCategory, handleChangeCategory }) {
 }
 
 function Category({ value, index, isActive, handleChangeCategory }) {
-  const color = !isActive ? theme.colors.neutral(0.5) : theme.colors.black;
-  const backgroundColor = !isActive ? theme.colors.grayBG : theme.colors.white;
+  const color = !isActive ? theme.colors.neutral(0.7) : theme.colors.white;
+  const backgroundColor = isActive
+    ? theme.colors.neutral(0.9)
+    : theme.colors.white;
   return (
     <Animated.View
       style={[styles.category, { backgroundColor }]}
