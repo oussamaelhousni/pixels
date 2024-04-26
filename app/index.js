@@ -1,14 +1,19 @@
 import { View, Image, StyleSheet, Pressable, Text } from "react-native";
 import React from "react";
 import { StatusBar } from "expo-status-bar";
+import { useRouter } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import { getWidthPercentage, getHeightPercentage } from "../helpers/common";
-import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
+import Animated, { FadeInDown } from "react-native-reanimated";
 import { theme } from "../constants/theme";
 const WelcomeScreen = () => {
+  const router = useRouter();
+  const goToHome = React.useCallback(() => {
+    router.push("/home");
+  }, []);
   return (
     <View style={styles.container}>
-      <StatusBar style="auto" />
+      <StatusBar style="dark" />
       <Image
         source={require("../assets/images/welcome1.png")}
         resizeMode="cover"
@@ -17,8 +22,14 @@ const WelcomeScreen = () => {
 
       {/* Linear gradient */}
       <Animated.View
-        entering={FadeInDown.duration(600)}
-        style={{ flex: 1, alignItems: "center", justifyContent: "flex-end" }}
+        entering={FadeInDown.duration(1000)}
+        style={{
+          flex: 1,
+          position: "absolute",
+          top: 0,
+          width: getWidthPercentage(100),
+          height: getHeightPercentage(100),
+        }}
       >
         <LinearGradient
           style={styles.gradient}
@@ -31,27 +42,28 @@ const WelcomeScreen = () => {
           start={{ x: 0.5, y: 0 }}
           end={{ x: 0.5, y: 0.6 }}
         />
-        {/* content*/}
-        <View style={styles.contentContainer}>
-          <Animated.Text
-            entering={FadeInDown.delay(400).duration(600)}
-            style={styles.title}
-          >
-            Pixels
-          </Animated.Text>
-          <Animated.Text
-            entering={FadeInDown.delay(600).duration(600)}
-            style={styles.punchline}
-          >
-            Every pixel tells a story
-          </Animated.Text>
-          <Animated.View entering={FadeInDown.delay(600).duration(600)}>
-            <Pressable style={styles.startButton}>
-              <Text style={styles.startButtonText}>Start Explore</Text>
-            </Pressable>
-          </Animated.View>
-        </View>
       </Animated.View>
+
+      {/* content*/}
+      <View style={styles.contentContainer}>
+        <Animated.Text
+          entering={FadeInDown.delay(400).springify()}
+          style={styles.title}
+        >
+          Pixels
+        </Animated.Text>
+        <Animated.Text
+          entering={FadeInDown.delay(400).springify()}
+          style={styles.punchline}
+        >
+          Every pixel tells a story
+        </Animated.Text>
+        <Animated.View entering={FadeInDown.delay(600).springify()}>
+          <Pressable style={styles.startButton} onPress={goToHome}>
+            <Text style={styles.startButtonText}>Start Explore</Text>
+          </Pressable>
+        </Animated.View>
+      </View>
     </View>
   );
 };
@@ -73,8 +85,11 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   contentContainer: {
+    paddingVertical: 50,
     alignItems: "center",
+    justifyContent: "flex-end",
     gap: 14,
+    flex: 1,
   },
   title: {
     fontSize: getHeightPercentage(6),
@@ -92,7 +107,6 @@ const styles = StyleSheet.create({
     borderRadius: theme.radius.xl,
     borderCurve: "continuous",
     paddingHorizontal: 90,
-    marginBottom: 50,
   },
   startButtonText: {
     color: theme.colors.white,
