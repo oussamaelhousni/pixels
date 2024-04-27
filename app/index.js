@@ -14,7 +14,6 @@ const WelcomeScreen = () => {
   }, []);
   return (
     <View style={styles.container}>
-      <StatusBar style="dark" />
       <Image
         source={require("../assets/images/welcome1.png")}
         resizeMode="cover"
