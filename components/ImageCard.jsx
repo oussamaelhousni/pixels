@@ -7,12 +7,23 @@ import {
   getImageHeight,
 } from "../helpers/common";
 import { Image } from "expo-image";
+import { useRouter } from "expo-router";
 
 export default function ImageCard({ item, columns, index }) {
   const { imageWidth: width, imageHeight: height } = item;
   const isLastColumn = (index + 1) % columns !== 0;
+  const router = useRouter();
   return (
-    <Pressable style={[styles.imageWrapper, isLastColumn && styles.spacing]}>
+    <Pressable
+      style={[styles.imageWrapper, isLastColumn && styles.spacing]}
+      onPress={() => {
+        console.log("open modal");
+        router.push({
+          pathname: "/home/image",
+          params: { ...item },
+        });
+      }}
+    >
       <Image
         source={{ uri: item?.webformatURL }}
         transition={1000}

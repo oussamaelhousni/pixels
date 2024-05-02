@@ -15,6 +15,15 @@ const _layout = () => {
             name="home/index"
             options={{ headerShown: false, statusBarColor: "black" }}
           />
+          <Stack.Screen
+            name="home/image"
+            options={{
+              headerShown: false,
+              statusBarColor: "black",
+              presentation: "transparentModal",
+              animation: "fade",
+            }}
+          ></Stack.Screen>
         </Stack>
       </BottomSheetModalProvider>
     </GestureHandlerRootView>
