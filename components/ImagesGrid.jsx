@@ -23,6 +23,7 @@ const ImagesGrid = ({ images }) => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     minHeight: 300,
     width: getWidthPercentage(100),
     paddingHorizontal: getWidthPercentage(4),
